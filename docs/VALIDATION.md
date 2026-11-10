@@ -1,6 +1,6 @@
 # Release validation
 
-Release 0.8.0 was prepared and checked locally. No public publication or installation into an existing user profile was performed.
+Release 0.8.0 uses local package checks and isolated native-host validation. Verification uses disposable profiles rather than an existing user profile. Release receipts identify the exact archive and installation source checked.
 
 - 37 Node test-runner regressions passed, covering multi-project routing, request/result isolation, cold-session connection, tombstones, permission preservation, first-run config and loopback guards.
 - All 19 shipped JavaScript modules passed syntax checks. Package metadata and internal import targets were checked.

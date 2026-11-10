@@ -10,12 +10,26 @@
 
 先确认 DSH 能正常运行。此版已按 **DSH Desktop 0.2.2-rc.1** 及其自带运行时核验；单独运行时需要 Node.js 22 或更新版本。
 
-1. 从维护者取得 `dsh-codex-bridge-0.8.0.tgz` 和 `SHA256SUMS.txt`，核对安装包的 SHA-256。
-2. 打开 DSH 的“插件 → 安装”，粘贴安装包的本地绝对路径。
-3. 确认安装；安装完成后核对包名 `dsh-codex-bridge`、版本 `0.8.0`。
-4. 安装完成后选择“立即启用”，或回到插件页启用该组合包。如果 DSH 提示需要重启，按提示重启。
+下载 **[0.8.0 安装包](https://github.com/czocelot/dsh-codex-bridge/releases/download/v0.8.0/dsh-codex-bridge-0.8.0.tgz)** 和 [SHA-256 校验文件](https://github.com/czocelot/dsh-codex-bridge/releases/download/v0.8.0/SHA256SUMS.txt)。[查看版本说明](https://github.com/czocelot/dsh-codex-bridge/releases/tag/v0.8.0)。
 
-无需手改 YAML、执行 npm 命令或另建 API Key。当前版本以本地文件交付，尚未提供公开下载地址。
+1. 保存这两个文件。在 Windows 上，可在文件所在目录运行以下命令，将计算出的哈希与校验文件中的一行进行比较：
+
+   ```powershell
+   Get-FileHash .\dsh-codex-bridge-0.8.0.tgz -Algorithm SHA256
+   Get-Content .\SHA256SUMS.txt
+   ```
+
+2. 打开 DSH 的“插件 → 安装”，粘贴安装包的本地绝对路径；也可以直接粘贴下方安装链接。
+3. 确认安装；安装完成后核对包名 `dsh-codex-bridge`、版本 `0.8.0`。
+4. 选择“立即启用”，或回到插件页启用该组合包。如果 DSH 提示需要重启，按提示重启。
+
+直接安装链接：
+
+```text
+https://github.com/czocelot/dsh-codex-bridge/releases/download/v0.8.0/dsh-codex-bridge-0.8.0.tgz
+```
+
+请使用本仓库的 Release 附件；npm 上的同名包属于另一项目。无需手改 YAML、执行 npm 命令或另建 API Key。
 
 ## 连接自己的会话
 
