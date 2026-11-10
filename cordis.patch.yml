@@ -1,0 +1,9 @@
+- insert:
+    - id: codex-native-bridge
+      name: dsh-codex-bridge
+      disabled: false
+      config:
+        port: 19491
+        enableMemberCompaction: false
+        compactionTimeoutMs: 600000
+        enableProviderControl: false

@@ -1,0 +1,32 @@
+{
+  "manifestVersion": "0.15",
+  "id": "dsh-codex-bridge",
+  "name": "DSH Codex Bridge",
+  "version": "0.8.0",
+  "facets": {
+    "client": {
+      "entry": "lib/client-lazy-r3.js",
+      "platform": "web",
+      "apiVersion": "v1alpha1"
+    },
+    "host": {
+      "entry": "lib/index.js",
+      "apiVersion": "v1alpha1"
+    }
+  },
+  "contributes": {
+    "x-display": [
+      {
+        "title": "DSH Codex Bridge",
+        "description": "Local-only bridge for explicitly selected DSH sessions, with per-request routing, results, queued cancellation and native permission controls."
+      }
+    ],
+    "x-components": [
+      {
+        "id": "codex-native-bridge",
+        "entry": "dsh-codex-bridge",
+        "defaultEnabled": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "name": "dsh-codex-bridge",
+  "version": "0.8.0",
+  "description": "Local-only bridge for explicitly selected DSH sessions, with per-request routing, results, queued cancellation and native permission controls.",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client-lazy-r3.js",
+    "./rotation": "./lib/index-rotation-r4-model.js",
+    "./package.json": "./package.json",
+    "./rotation/package.json": "./package.json",
+    "./locale/*": "./locale/*",
+    "./rotation/locale/*": "./locale/*"
+  },
+  "files": [
+    "lib/",
+    "locale/",
+    "docs/",
+    "cordis.patch.yml",
+    "dsh-plugin.json",
+    "README.md",
+    "README.zh.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "SECURITY.md",
+    "CHANGELOG.md",
+    "test/"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-typert-protocol": ">=0.1.7-rc.1 <0.3.0",
+    "@deepseek-ai/dsh-home-paths": ">=0.1.7-rc.1 <0.3.0"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-typert-protocol": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-home-paths": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "codex",
+    "bridge",
+    "cordis"
+  ],
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-api-gateway",
+        "@deepseek-ai/dsh-client-ui-renderer"
+      ]
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

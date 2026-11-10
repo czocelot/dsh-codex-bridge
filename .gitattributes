@@ -1,0 +1,4 @@
+* text=auto eol=lf
+lib/*.js -text
+*.tgz -text
+*.zip -text

@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "DSH Codex Bridge",
+    "description": "Local-only bridge for explicitly selected DSH sessions, with per-request routing, results, queued cancellation and native permission controls."
+  }
+}

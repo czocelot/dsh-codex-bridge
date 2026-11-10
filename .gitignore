@@ -1,0 +1,13 @@
+node_modules/
+dist/
+*.tgz
+*.zip
+verification/
+plugin-data/
+*.jsonl
+*.log
+.env*
+!.env.example
+session-bindings.json
+auth.json
+.npmrc
