@@ -13,3 +13,19 @@ Member compaction is also off by default and uses DSH native services for an exp
 ## Runtime state
 
 On the new panel-only entry, state files are keyed by profile name and a panel marker under the official DSH Home path. Legacy roots also include a hash of their configured session ID. Release 0.8.0 deliberately does not import a previous user's package-local session-bindings.json or request-ledger.jsonl. For an existing installation, keep a private backup and reconnect explicitly; do not publish those files. Different profiles do not inherit each other's saved grants.
+
+## Rotation permission choice (2026-11-14)
+Rotation no longer requires Auto. A new request defaults to `permission_mode: "native"`, keeping the permission preset assigned by native session creation, regardless of the source session. Only explicit `permission_mode: "follow"` inherits the source session's preset, sandbox and approval policy. No source or global permission is changed.
+
+To choose another existing native preset for the new session, explicitly pass `permission_mode: "explicit"` and `permission_preset: "<native preset id>"`. The caller must have the user's authorization for that choice. The bridge validates the native catalog and uses the existing audited, revision-checked native setter. It does not disable automatic review or cc-safety-net independently of that chosen preset.
+
+Legacy `initialize_new_auto: true` remains an explicit Auto request for compatibility; it cannot be combined with the new options. Saved transactions retain their selected permission and commit checks it has not changed. Existing running hosts need normal plugin reload before this code is active; updating files alone does not hot-reload ESM modules. No live sessions are created by the tests.
+For automatic rotation, each `rotationLayers` entry optionally accepts `permissionMode: native` (default, retain new-session settings), `permissionMode: follow`, or `permissionMode: explicit` with `permissionPreset: <native preset id>`. This setting applies only to that layer’s next newly prepared rotation; it never rewrites a saved transaction or a running source session. Configure an explicit mode only with user approval.
+
+## Explicit session continuation
+
+The optional rotation entry also honors an existing user-controlled policy at `tools/dsh-session-continuation-20261117-r1/POLICY.json` within its configured workspace. The policy is private runtime state and is never included in the repository or installation archive. No project or session is opted in by installation.
+
+A policy has schema `dsh-user-session-continuation/1`, `enabled: true`, an absolute `workspace` matching this entry's workspace, an explicit `session_ids` list, and `native_permissions_review_SafetyNet_and_compaction_unchanged: true`. Only those exact IDs continue without the bridge's cumulative 650-step automatic rotation and 690-step pre-model guard. These are model steps, not training iterations. Missing, invalid, disabled or mismatched policies retain the existing bridge limits.
+
+Continuation calls the downstream native step handler normally, including its rejection path. It does not change permission presets, native review, SafetyNet, model settings or native compaction; it does not replay, delete or unfreeze saved pending inputs. Removing an ID or disabling the policy restores bridge admission checks. The combined rotation entry retains the independent empty-session creation API described in [API.md](API.md).

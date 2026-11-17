@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {Readable} from 'node:stream';
 import {resolve} from 'node:path';
-import {validateConfig, createHandler} from '../lib/index.js';
+import {validateConfig, createHandler} from 'dsh-codex-bridge';
 import {validateConfig as validateRotation} from '../lib/index-rotation-r4-model.js';
 import {readSessionBindings} from '../lib/session-control.js';
 const session='session-11111111-1111-4111-8111-111111111111';
@@ -21,6 +21,6 @@ function fixture(){
 test('fresh one-click config starts without a legacy session or project',()=>{const c=validateConfig();assert.equal(c.sessionId,'');assert.equal(c.workspace,undefined);assert.deepEqual(c.sessionBindings,[]);assert.deepEqual(readSessionBindings(),[])});
 test('legacy ID and workspace must both be set',()=>{assert.throws(()=>validateConfig({sessionId:session}));assert.throws(()=>validateConfig({workspace:resolve('fixture-project')}));assert.equal(validateConfig({sessionId:session,workspace:resolve('fixture-project')}).sessionId,session)});
 test('unscoped static bindings and member maintenance are not enabled on first run',()=>{assert.throws(()=>validateConfig({sessionBindings:[{session_id:session,expected_title:'Fixture'}]}));assert.throws(()=>validateConfig({enableMemberCompaction:true}));assert.throws(()=>validateRotation())});
-test('fresh status is healthy and bound-session listing is empty without side effects',async()=>{const f=fixture();const status=await f.request('GET','/status');assert.equal(status.status,200);assert.equal(status.value.attached,false);assert.equal(status.value.version,'0.8.0');const listing=await f.request('GET','/sessions');assert.deepEqual(listing.value.sessions,[]);assert.deepEqual(f.calls,{prompts:0,loads:0,permissions:0})});
+test('fresh status is healthy and bound-session listing is empty without side effects',async()=>{const f=fixture();const status=await f.request('GET','/status');assert.equal(status.status,200);assert.equal(status.value.attached,false);assert.equal(status.value.version,'0.8.1');const listing=await f.request('GET','/sessions');assert.deepEqual(listing.value.sessions,[]);assert.deepEqual(f.calls,{prompts:0,loads:0,permissions:0})});
 test('unbound prompt is refused before any native model call',async()=>{const f=fixture();const r=await f.request('POST','/v1/prompt',{session_id:session,request_id:'codex-fixture',text:'Fixture only',mode:'queue'});assert.equal(r.status,403);assert.equal(r.value.error,'SESSION_NOT_BOUND');assert.equal(f.calls.prompts,0)});
 test('browser origin and wrong host cannot access local bridge',async()=>{const f=fixture();assert.equal((await f.request('GET','/status',null,{origin:'https://example.org'})).status,403);assert.equal((await f.request('GET','/status',null,{host:'example.org:32091'})).status,403)});

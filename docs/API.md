@@ -37,3 +37,34 @@ Prefer the Bridge settings panel. The connection endpoints are `/sessions/connec
 The public DSH settings RPC namespace is `codexBridgeConnection`: list, presets, listener, snapshot, prepare, confirm, cancel, savePort and unbind. Reads do not silently change permissions. An empty preset (null) retains the current native configuration.
 
 Errors use `{"error":"CODE"}` with an HTTP status. Examples: SESSION_NOT_BOUND (bind explicitly), SESSION_SCOPE_MISMATCH (verify project), REQUEST_CONTENT_MISMATCH / REQUEST_SESSION_MISMATCH (query the original ID), LOOPBACK_ONLY (use a local non-browser client). Do not retry an uncertain action with a new ID.
+
+## Create an empty session
+
+Use `GET /workspaces` to list DSH's registered workspaces (ID, title and path). Choose the exact `workspace_id`; creation does not open a folder picker or switch the currently displayed session.
+
+Send `POST /sessions/create` with JSON and `x-codex-bridge-control: bridge-session-create-v1`:
+
+```json
+{
+  "request_id": "codex-new-task-001",
+  "workspace_id": "workspace-from-list",
+  "title": "New task",
+  "permission_mode": "native"
+}
+```
+
+The title is optional. Permission selection applies only to the new session:
+
+| Mode | Fields | Behavior |
+| --- | --- | --- |
+| `native` (default) | No permission preset | Keep the native configuration, including custom permissions, without calling the permission setter. |
+| `follow` | `source_session_id` | Copy that accessible session's current native preset and verify its sandbox/approval settings. The source is unchanged. |
+| `explicit` | `permission_preset` | Select an existing native preset, including Auto when explicitly requested. |
+
+Follow requires a stable native permission view; open a cold source session in DSH first if that view is unavailable. Unknown presets and conflicting mode options are rejected before creating a session. The existing rotation-only `initialize_new_auto` option is not accepted by this endpoint.
+
+The result includes `session_id`, `workspace_id`, `title`, `permission_mode`, `permission` and `phase`. No initial or handoff message is sent (`initial_message_sent: false`), and no connection is saved (`bridge_bound: false`). To send work afterward, explicitly bind the returned ID through the normal connection flow.
+
+Use `GET /sessions/create/status?request_id=codex-new-task-001` to recover a receipt. Repeating an identical request ID returns or resumes the same creation; changing its contents returns `CREATE_REQUEST_CONTENT_MISMATCH`. A known created ID is retained after later errors. If native creation returned no trustworthy ID, `UNCERTAIN_CREATION_DO_NOT_RESUBMIT` blocks automatic retry: inspect DSH before any new creation request.
+
+Both standard and rotation entries expose these endpoints. `GET /status` reports `sessionCreationBuild` and the supported permission modes. Existing handoff/rotation endpoints keep their own behavior.

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.1 (unreleased)
+
+- Create empty sessions in a selected registered workspace, with native, follow or explicit permissions. No initial message or automatic binding.
+- Retain creation receipts and reject unsafe duplicate retries.
+- Preserve explicit per-project session continuation alongside standalone creation in the optional rotation entry. Native permissions, review and compaction remain authoritative.
+
 ## 0.8.0
 
 - First portable release preparation from the existing bridge implementation.

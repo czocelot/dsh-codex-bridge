@@ -9,7 +9,7 @@ This guide is for maintainers. Installation, binding and everyday use are docume
 | `lib/index.js` | Ordinary host entry and local HTTP listener |
 | `lib/client-lazy-r3.js` | DSH settings client |
 | `lib/*control*.js`, `lib/*persistence*.js` | Session routing, permission confirmation and private state |
-| `lib/index-rotation-r4-model.js` | Separate, opt-in experimental rotation entry |
+| `lib/index-session-continuation-r1.js` | Separate, opt-in experimental rotation entry |
 | `cordis.patch.yml` | Default DSH bundle layer |
 | `dsh-plugin.json`, `package.json` | Plugin entries, package exports and bundle metadata |
 | `test/` | Deterministic Node.js fixtures |
@@ -52,3 +52,11 @@ The local release review directory, outside this repository, retains the install
 ## License
 
 Retain the [MIT license](../LICENSE) and [third-party notices](../THIRD_PARTY_NOTICES.md) in source and release archives.
+
+## Preparing an updated sanitized release
+
+Do not rerun a prior release's one-off push, history rewrite or upload script. Its pinned commit, file count, source inventory and archive hash describe that earlier release. Keep new audit tooling and receipts in a private review directory outside this repository.
+
+Merge reviewed behavior from local runtime repairs without copying profile data, policy contents, bindings, request ledgers or diagnostic paths. Compare the default and optional package exports with the plugin manifest. Run deterministic tests, build a fresh tarball with install scripts disabled, compare every archive member with the reviewed source, and scan source, actual archive bytes, reachable Git contents and metadata for private identifiers. Audit regular tests as public source too; use synthetic projects, sessions and policy fixtures.
+
+Bind the release plan to the current base commit, the complete proposed source file set and SHA-256 hashes, and the exact tarball and checksum file. Recheck all hashes and the remote before a separately authorized normal push. Any file change invalidates the plan and requires a new review; old installation receipts never validate a new archive. Existing public tags/assets remain unchanged until an explicitly authorized new release is ready.

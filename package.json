@@ -1,14 +1,14 @@
 {
   "name": "dsh-codex-bridge",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Local-only bridge for explicitly selected DSH sessions, with per-request routing, results, queued cancellation and native permission controls.",
   "license": "MIT",
   "type": "module",
-  "main": "lib/index.js",
+  "main": "lib/index-create-r6.js",
   "exports": {
-    ".": "./lib/index.js",
+    ".": "./lib/index-create-r6.js",
     "./client": "./lib/client-lazy-r3.js",
-    "./rotation": "./lib/index-rotation-r4-model.js",
+    "./rotation": "./lib/index-session-continuation-r1.js",
     "./package.json": "./package.json",
     "./rotation/package.json": "./package.json",
     "./locale/*": "./locale/*",

@@ -2,7 +2,7 @@
   "manifestVersion": "0.15",
   "id": "dsh-codex-bridge",
   "name": "DSH Codex Bridge",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "facets": {
     "client": {
       "entry": "lib/client-lazy-r3.js",
@@ -10,7 +10,7 @@
       "apiVersion": "v1alpha1"
     },
     "host": {
-      "entry": "lib/index.js",
+      "entry": "lib/index-create-r6.js",
       "apiVersion": "v1alpha1"
     }
   },
