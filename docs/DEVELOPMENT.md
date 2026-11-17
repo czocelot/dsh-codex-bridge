@@ -53,7 +53,7 @@ The local release review directory, outside this repository, retains the install
 
 Retain the [MIT license](../LICENSE) and [third-party notices](../THIRD_PARTY_NOTICES.md) in source and release archives.
 
-## Preparing an updated sanitized release
+## Preparing an updated release
 
 Do not rerun a prior release's one-off push, history rewrite or upload script. Its pinned commit, file count, source inventory and archive hash describe that earlier release. Keep new audit tooling and receipts in a private review directory outside this repository.
 

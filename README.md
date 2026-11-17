@@ -10,23 +10,23 @@ This is an independent plugin, licensed under [MIT](LICENSE). It is not an offic
 
 You need a working DSH installation. This version was checked with DSH Desktop **0.2.2-rc.1** and its bundled runtime. A standalone runtime must be Node.js 22 or newer.
 
-Download the **[0.8.0 installation package](https://github.com/czocelot/dsh-codex-bridge/releases/download/v0.8.0/dsh-codex-bridge-0.8.0.tgz)** and its [SHA-256 checksum file](https://github.com/czocelot/dsh-codex-bridge/releases/download/v0.8.0/SHA256SUMS.txt). [Release notes](https://github.com/czocelot/dsh-codex-bridge/releases/tag/v0.8.0).
+Download the **[0.8.1 installation package](https://github.com/czocelot/dsh-codex-bridge/releases/download/v0.8.1/dsh-codex-bridge-0.8.1.tgz)** and its [SHA-256 checksum file](https://github.com/czocelot/dsh-codex-bridge/releases/download/v0.8.1/SHA256SUMS.txt). [Release notes](https://github.com/czocelot/dsh-codex-bridge/releases/tag/v0.8.1).
 
 1. Save both files. To check the download on Windows, run the following in their folder and compare the hash with the line in the checksum file:
 
    ```powershell
-   Get-FileHash .\dsh-codex-bridge-0.8.0.tgz -Algorithm SHA256
+   Get-FileHash .\dsh-codex-bridge-0.8.1.tgz -Algorithm SHA256
    Get-Content .\SHA256SUMS.txt
    ```
 
 2. Open DSH's **Plugins → Install** page and paste the tarball's absolute local path. You can also paste the direct installation URL below.
-3. Confirm installation. When it finishes, check the package name `dsh-codex-bridge` and version `0.8.0`.
+3. Confirm installation. When it finishes, check the package name `dsh-codex-bridge` and version `0.8.1`.
 4. Choose **Enable now**, or enable the bundle on the Plugins page. Restart DSH if it requests a restart.
 
 Direct installation URL:
 
 ```text
-https://github.com/czocelot/dsh-codex-bridge/releases/download/v0.8.0/dsh-codex-bridge-0.8.0.tgz
+https://github.com/czocelot/dsh-codex-bridge/releases/download/v0.8.1/dsh-codex-bridge-0.8.1.tgz
 ```
 
 Use this repository's release assets: the similarly named npm package is a different project. You do not need to edit YAML, run npm commands, or create another API key.

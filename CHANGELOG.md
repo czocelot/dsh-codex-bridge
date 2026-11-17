@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.8.1 (unreleased)
+## 0.8.1 — 2026-11-17
 
 - Create empty sessions in a selected registered workspace, with native, follow or explicit permissions. No initial message or automatic binding.
 - Retain creation receipts and reject unsafe duplicate retries.
@@ -17,5 +17,4 @@
 - Removed archived experimental modules and machine-specific diagnostic writes.
 - Added bilingual installation/use documentation, API/security notes, MIT license and third-party notices.
 - Separated maintainer instructions into docs/DEVELOPMENT.md and clarified post-install enablement in the user guides.
-- Kept release audit scripts outside the public source repository and install package.
 - Added public release download/checksum links and DSH URL or local-file installation instructions.
